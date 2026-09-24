@@ -3,7 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Padel Ultimate Cards — FUT Style Cards & Padel Roasts</title>
+  <title>PUT26 Padel Ultimate Cards | Cartas y Roasts</title>
+  <meta name="description" content="Crea tu carta PUT26 de pádel con nivel Playtomic, stats infladas y roast del club.">
+  <meta name="theme-color" content="#0D0F12">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="PUT26 Padel Ultimate Cards">
+  <meta property="og:description" content="Convierte tu nivel real de Playtomic en una carta de pádel legendaria.">
+  <meta property="og:image" content="https://padelcards.app/put26-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PUT26 Padel Ultimate Cards">
+  <meta name="twitter:description" content="Tu carta de pádel, tus stats, tu roast.">
+  <meta name="twitter:image" content="https://padelcards.app/put26-card.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230d0f12'/%3E%3Ccircle cx='32' cy='32' r='19' fill='none' stroke='%2322c55e' stroke-width='4'/%3E%3Cpath d='M21 25c8 4 14 4 22 0M19 39c9-4 17-4 26 0M32 13v38' fill='none' stroke='%2306b6d4' stroke-width='3'/%3E%3Cpath d='M39 8 27 31h9l-5 25 15-29h-9z' fill='%23f59e0b'/%3E%3C/svg%3E">
   
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -15,6 +29,7 @@
   
   <!-- Tone.js for dynamic futuristic UI sound effects -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
 
   <!-- Tailwind Configuration -->
   <script>
@@ -56,7 +71,7 @@
       border-radius: 9999px;
     }
 
-    /* FUT Card Shape Clip-path */
+    /* PUT26 card shield shape */
     .fut-card-shield {
       clip-path: polygon(
         0% 8%,
@@ -134,6 +149,21 @@
       transform-style: preserve-3d;
     }
 
+    .fut-card-shield::before, .fut-card-inner-shield::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(135deg, rgba(255,255,255,.16) 0 1px, transparent 1px 18px), repeating-linear-gradient(155deg, rgba(255,255,255,.04) 0 2px, transparent 2px 9px);
+      mix-blend-mode: screen;
+      opacity: .55;
+    }
+    .card-foil-gold { box-shadow: inset 0 0 0 2px rgba(255,255,255,.22), inset 0 0 0 5px rgba(245,158,11,.42), 0 0 30px rgba(245,158,11,.15); }
+    .card-foil-neon { box-shadow: inset 0 0 0 2px rgba(255,255,255,.18), inset 0 0 0 5px rgba(34,197,94,.5), 0 0 30px rgba(6,182,212,.2); }
+    .card-foil-toxic { box-shadow: inset 0 0 0 2px rgba(255,255,255,.18), inset 0 0 0 5px rgba(236,72,153,.55), 0 0 30px rgba(168,85,247,.22); }
+    .card-foil-legend { box-shadow: inset 0 0 0 2px rgba(255,255,255,.24), inset 0 0 0 5px rgba(56,189,248,.55), 0 0 30px rgba(14,165,233,.2); }
+    .avatar-frame { transform-origin: center; transition: transform .15s ease; }
+
     /* Scanning line animation */
     @keyframes scanAnimation {
       0% { top: 0%; opacity: 0; }
@@ -191,7 +221,7 @@
           <h1 class="text-xs font-black tracking-wider uppercase text-white font-display flex items-center gap-1.5">
             PADEL ULTIMATE <span class="bg-gradient-to-r from-neon-green to-neon-cyan bg-clip-text text-transparent">CARDS</span>
           </h1>
-          <p class="text-[9px] text-slate-400 font-medium tracking-tight">FUT 26 • ROAST EDITION</p>
+          <p class="text-[9px] text-slate-400 font-medium tracking-tight">PUT26 • ROAST EDITION</p>
         </div>
       </div>
 
@@ -221,14 +251,14 @@
         <div class="space-y-2 text-center pt-2">
           <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-neon-green/10 border border-neon-green/30 text-neon-green text-xs font-semibold">
             <span class="w-2 h-2 rounded-full bg-neon-green animate-ping"></span>
-            Generador Oficial de Cartas FUT & Roasts
+            Generador Oficial de Cartas PUT26 & Roasts
           </div>
           <h2 class="text-3xl font-black text-white font-display tracking-tight leading-none uppercase">
             Crea tu carta definitiva.<br>
             <span class="bg-gradient-to-r from-neon-green via-neon-cyan to-trophy-gold bg-clip-text text-transparent">Destapa tu nivel real.</span>
           </h2>
           <p class="text-xs text-slate-400 max-w-xs mx-auto">
-            Convierte a cualquier padelero en un cromo de FIFA con estadísticas infladas y un roast sin anestesia.
+            Convierte a cualquier padelero en una carta deportiva con estadísticas infladas y un roast sin anestesia.
           </p>
         </div>
 
@@ -275,7 +305,8 @@
           </div>
 
           <!-- Drop Area -->
-          <div id="dropzoneBox" onclick="simulatePlaytomicScan()" class="border-2 border-dashed border-playtomic-blue/40 rounded-xl p-4 text-center cursor-pointer hover:border-playtomic-blue hover:bg-playtomic-blue/5 transition relative overflow-hidden">
+          <input type="file" id="playtomicUpload" accept="image/*" class="hidden" onchange="handlePlaytomicUpload(event)">
+          <div id="dropzoneBox" onclick="document.getElementById('playtomicUpload').click()" class="border-2 border-dashed border-playtomic-blue/40 rounded-xl p-4 text-center cursor-pointer hover:border-playtomic-blue hover:bg-playtomic-blue/5 transition relative overflow-hidden">
             <!-- Simulated Scanning Beam Effect (Hidden by default) -->
             <div id="ocrLaserBeam" class="hidden absolute left-0 right-0 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_12px_cyan] scanner-beam z-10"></div>
             
@@ -285,7 +316,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
               <p class="text-xs font-bold text-white">Sube captura de tu perfil de Playtomic</p>
-              <p class="text-[10px] text-slate-400 mt-0.5">Toca aquí para escanear nivel, foto y stats en 1 segundo</p>
+              <p class="text-[10px] text-slate-400 mt-0.5">Sube una captura: OCR local de Nivel / Level y formato X.XX</p>
             </div>
 
             <!-- Scanning State UI -->
@@ -297,7 +328,7 @@
                 </svg>
               </div>
               <p class="text-xs font-black text-cyan-400 tracking-wider font-mono">EXTRAYENDO OCR PLAYTOMIC...</p>
-              <p class="text-[10px] text-slate-300">Detectado: Nivel 3.42 • Winrate 48% • Pala Siux</p>
+              <p class="text-[10px] text-slate-300">Procesando texto de Nivel / Level en local...</p>
             </div>
           </div>
 
@@ -462,6 +493,10 @@
                     🎲
                   </button>
                 </div>
+                <div class="grid grid-cols-2 gap-1 mt-1.5">
+                  <label class="text-[9px] text-slate-500">Zoom <input id="avatarZoom" type="range" min="1" max="1.8" step="0.01" value="1" oninput="updateAvatarAdjustments()" class="w-full"></label>
+                  <label class="text-[9px] text-slate-500">Vertical <input id="avatarPanY" type="range" min="-35" max="35" step="1" value="0" oninput="updateAvatarAdjustments()" class="w-full"></label>
+                </div>
               </div>
             </div>
           </div>
@@ -607,9 +642,9 @@
           </div>
         </div>
 
-        <!-- The High-Res FUT Card Showcase with 3D Tilt Effect -->
+        <!-- The High-Res PUT26 Card Showcase with 3D Tilt Effect -->
         <div class="perspective-container flex justify-center pt-1 pb-2">
-          <div id="finalCardContainer" class="card-tilt-target relative w-[310px] fut-card-shield p-[3.5px] shadow-[0_20px_50px_rgba(0,0,0,0.85)] cursor-pointer group" onmousemove="handleCardTilt(event)" onmouseleave="resetCardTilt()" ontouchmove="handleCardTouchMove(event)" ontouchend="resetCardTilt()">
+          <div id="finalCardContainer" class="card-tilt-target relative w-[310px] fut-card-shield p-[3.5px] shadow-[0_20px_50px_rgba(0,0,0,0.85)] cursor-pointer group" onclick="enableGyroscope()" onmousemove="handleCardTilt(event)" onmouseleave="resetCardTilt()" ontouchstart="enableGyroscope()" ontouchmove="handleCardTouchMove(event)" ontouchend="resetCardTilt()">
             
             <!-- Dynamic Foil Shell & Theme -->
             <div id="finalCardFoil" class="fut-card-shield card-foil-gold h-full p-4 flex flex-col justify-between relative overflow-hidden">
@@ -664,7 +699,7 @@
                 <div class="h-0.5 w-24 bg-gradient-to-r from-transparent via-trophy-gold to-transparent mx-auto mt-0.5"></div>
               </div>
 
-              <!-- 6 Stats Grid (FUT Style) -->
+              <!-- 6 Stats Grid (PUT26 Style) -->
               <div class="relative z-10 grid grid-cols-2 gap-x-4 gap-y-1 text-xs font-mono font-black px-4 py-2 bg-black/50 rounded-xl mt-2 border border-white/10 backdrop-blur-sm">
                 <!-- Col 1 -->
                 <div class="space-y-1">
@@ -771,7 +806,7 @@
     </main>
 
     <!-- Hidden Canvas for crisp HD image generation and download -->
-    <canvas id="exportCanvas" width="900" height="1350" class="hidden"></canvas>
+    <canvas id="exportCanvas" width="1080" height="1920" class="hidden"></canvas>
 
     <!-- Custom Notification Toast Modal (No browser alerts!) -->
     <div id="toastNotification" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none max-w-xs w-full px-4">
@@ -817,7 +852,7 @@
       mode: 'flex', // 'flex' or 'troll'
       foilThemeIndex: 0,
       foilThemes: ['card-foil-gold', 'card-foil-neon', 'card-foil-toxic', 'card-foil-legend'],
-      themeNames: ['Oro Rare', 'Neon Flash', 'Toxic Roast', 'Icon Legend'],
+      themeNames: ['Oro Rare', 'Toxic Flash', 'Troll Carnage', 'Icon Legend'],
       soundEnabled: true,
       player: {
         name: 'Paquito Master',
@@ -835,6 +870,8 @@
         },
         traits: ['La Nevera', 'Bandeja Letal'],
         avatarUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
+        avatarScale: 1,
+        avatarPanY: 0,
         currentRoast: ''
       }
     };
@@ -856,7 +893,16 @@
       "Presumes de nivel 3.8 en Playtomic pero tu compañero lleva una semana con contractura en el cuello de cubrirte la espalda.",
       "OVR 92 de fantasía: Tu mejor golpe es cantar 'MÍA MÍA' y dejar pasar una bola que bota 3 veces delante de tu nariz.",
       "Dices que juegas al revés 'como Lebrón', pero en cuanto te tiran un globo al cuerpo pareces un gato intentando esquivar agua.",
-      "El calentamiento de 5 minutos lo haces como si estuvieras en el Premier Padel de Qatar, pero al minuto 15 pides agua y un fisio."
+      "El calentamiento de 5 minutos lo haces como si estuvieras en el Premier Padel de Qatar, pero al minuto 15 pides agua y un fisio.",
+      "Tu volea tiene la elegancia de una puerta de garaje, pero la celebras como si hubieras ganado Roland Garros.",
+      "La bola a la reja no es mala suerte: es tu sistema de navegación en modo ahorro de batería.",
+      "Tu bandeja tarda tanto en bajar que el rival tiene tiempo de pedir una caña y volver.",
+      "Te compras la pala del jugador del momento y esperas que incluya también su coordinación.",
+      "El tercer tiempo es tu verdadero cuadro: ahí sí juegas todas las rondas y no perdonas una caña.",
+      "Calientas hombros, muñecas y ego; lo único que no calientas es el revés.",
+      "Tu nivel sube más en el grupo de WhatsApp que en Playtomic.",
+      "Cuando dices 'una más y nos vamos', la pista ya sabe que quedan tres sets y dos rondas de cañas.",
+      "Pides que no corra el aire como si el viento tuviera algo personal contra tu globo de tres metros."
     ];
 
     const roastsTroll = [
@@ -865,7 +911,18 @@
       "Le regalaron una pala de control y aun así manda las voleas a la M-30. Tu compañero merece un monumento y una subvención del gobierno.",
       "Su posición no es ni Drive ni Revés: su posición es 'La Estatua'. Ve pasar las chiquitas como quien mira un tren de mercancías.",
       "Dice que juega con resaca pero juega igual de mal cuando bebe Aquarius. Un auténtico héroe del Tercer Tiempo.",
-      "Gran dominador de la técnica 'Palazo al cristal y mirar con desprecio a la pared como si estuviera mal construida'."
+      "Gran dominador de la técnica 'Palazo al cristal y mirar con desprecio a la pared como si estuviera mal construida'.",
+      "Tu nevera está tan bien ejecutada que el frigorífico de casa te ha pedido clases.",
+      "Le echas la culpa al árbitro, al viento y a las bolas; solo te falta culpar al calendario lunar.",
+      "Tu calentamiento de pro dura más que tus puntos: mucho skipping y cero transición.",
+      "La pala de 400€ ya ha entendido que el problema no era su balance.",
+      "La reja te conoce por tu nombre y te guarda sitio todos los domingos.",
+      "En el tercer tiempo tienes un 99 de resistencia, pero en pista un 42 de cardio.",
+      "Tu compañero cubre dos pistas, tres errores y una crisis existencial por partido.",
+      "Celebras un punto normal como una final y pierdes el siguiente discutiendo con el viento.",
+      "Tienes más excusas preparadas que bolas nuevas en el tubo.",
+      "El globo que llamaste táctico era simplemente una devolución con miedo.",
+      "Tu ranking no baja porque ya está en el sótano y la pala no encuentra las escaleras."
     ];
 
     // Sound Synthesizer using Web Audio API / Tone.js
@@ -969,8 +1026,10 @@
       showToast(selectedMode === 'flex' ? 'Modo Flex seleccionado 👑' : 'Modo Pareja Troll activado 🤡', '🎯');
     }
 
-    // Playtomic OCR Simulator with Realistic Scanning FX
-    function simulatePlaytomicScan() {
+    // OCR local de capturas Playtomic, con fallback sin bloquear el flujo.
+    async function handlePlaytomicUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
       const dropIdle = document.getElementById('dropzoneIdle');
       const dropScanning = document.getElementById('dropzoneScanning');
       const laser = document.getElementById('ocrLaserBeam');
@@ -980,25 +1039,51 @@
       dropIdle.classList.add('hidden');
       dropScanning.classList.remove('hidden');
 
-      setTimeout(() => {
-        // Simulated parsed data
-        const detectedLevel = (Math.random() * (4.2 - 2.6) + 2.6).toFixed(2);
-        state.player.playtomicLevel = parseFloat(detectedLevel);
+      try {
+        if (!window.Tesseract) throw new Error('OCR no disponible');
+        const result = await Tesseract.recognize(file, 'spa+eng', {
+          logger: data => {
+            const percent = Math.round((data.progress || 0) * 100);
+            const status = document.querySelector('#dropzoneScanning p:last-child');
+            if (status) status.textContent = `Analizando captura localmente... ${percent}%`;
+          }
+        });
+        const text = result.data.text.replace(',', '.');
+        const matches = [...text.matchAll(/(?:nivel|level)?\s*([1-7](?:\.\d{1,2})?)/gi)]
+          .map(match => Number(match[1])).filter(value => value >= 1 && value <= 7);
+        const detectedLevel = (matches[0] || 3.42).toFixed(2);
+        state.player.playtomicLevel = Number(detectedLevel);
         document.getElementById('inputPlaytomicLevel').value = detectedLevel;
         document.getElementById('levelValueDisplay').innerText = detectedLevel;
-
+        updateSuggestedStats(Number(detectedLevel));
         laser.classList.add('hidden');
         dropScanning.classList.add('hidden');
         dropIdle.classList.remove('hidden');
-
         playSound('success');
-        showToast(`Playtomic verificado: Nivel ${detectedLevel} extraído`, '✅');
-        
-        // Auto transition to editor after scan completion
-        setTimeout(() => {
-          goToEditor();
-        }, 600);
-      }, 1600);
+        showToast(matches.length ? `Playtomic verificado: Nivel ${detectedLevel}` : `No se leyó el nivel; usamos ${detectedLevel} por defecto`, matches.length ? '✅' : 'ℹ️');
+        setTimeout(goToEditor, 500);
+      } catch (error) {
+        laser.classList.add('hidden');
+        dropScanning.classList.add('hidden');
+        dropIdle.classList.remove('hidden');
+        document.getElementById('inputPlaytomicLevel').value = '3.42';
+        document.getElementById('levelValueDisplay').innerText = '3.42';
+        state.player.playtomicLevel = 3.42;
+        showToast('No se pudo leer la captura; nivel 3.42 aplicado', 'ℹ️');
+      } finally {
+        event.target.value = '';
+      }
+    }
+
+    function updateSuggestedStats(level) {
+      const boost = Math.round(Math.min(8, Math.max(-4, (level - 3.5) * 3)));
+      ['POT', 'VOL', 'BAN', 'VEL', 'REF'].forEach((key, index) => {
+        const value = Math.min(99, Math.max(30, [88, 84, 86, 87, 85][index] + boost));
+        state.player.stats[key] = value;
+        document.getElementById(`slider${key}`).value = value;
+        document.getElementById(`val${key}`).innerText = value;
+      });
+      updateCardLive();
     }
 
     // Dynamic OVR Calculator based on weighted padel attributes
@@ -1083,10 +1168,20 @@
       const reader = new FileReader();
       reader.onload = function(e) {
         state.player.avatarUrl = e.target.result;
+        state.player.avatarScale = 1;
+        state.player.avatarPanY = 0;
+        document.getElementById('avatarZoom').value = 1;
+        document.getElementById('avatarPanY').value = 0;
         updateCardLive();
         showToast('Foto cargada con éxito', '📸');
       };
       reader.readAsDataURL(file);
+    }
+
+    function updateAvatarAdjustments() {
+      state.player.avatarScale = Number(document.getElementById('avatarZoom').value);
+      state.player.avatarPanY = Number(document.getElementById('avatarPanY').value);
+      updateCardLive();
     }
 
     function cycleCardFoil() {
@@ -1114,6 +1209,7 @@
       document.getElementById('miniCardOvr').innerText = state.player.ovr;
       document.getElementById('miniCardPtBadge').innerText = state.player.playtomicLevel;
       document.getElementById('miniCardAvatarImg').src = state.player.avatarUrl;
+      document.getElementById('miniCardAvatarImg').style.transform = `scale(${state.player.avatarScale}) translateY(${state.player.avatarPanY}px)`;
 
       // Stats
       document.getElementById('miniStatPOT').innerText = state.player.stats.POT;
@@ -1138,13 +1234,17 @@
       const miniFoil = document.getElementById('miniFoilBorder');
       state.foilThemes.forEach(th => miniFoil.classList.remove(th));
       miniFoil.classList.add(foilClass);
+      const finalAvatar = document.getElementById('finalCardAvatarImg');
+      if (finalAvatar) {
+        finalAvatar.style.transform = `scale(${state.player.avatarScale}) translateY(${state.player.avatarPanY}px)`;
+      }
     }
 
     function generateRoastAndCard() {
       playSound('roast');
       updateCardLive();
 
-      // Pick roast based on mode & stats
+      // Pick roast based on mode, stats and playstyle.
       rerollRoast(false);
 
       // Populate Screen 3
@@ -1193,7 +1293,18 @@
 
     function rerollRoast(triggerSound = true) {
       if (triggerSound) playSound('click');
-      const pool = state.mode === 'troll' ? roastsTroll : roastsFlex;
+      const traitRoasts = {
+        'La Nevera': 'Tu compañero ya no sabe si juega contigo o contra un frigorífico: cada bola que te llega sale más fría que entró.',
+        'Rompe Cristales': 'Con ese Rompe Cristales no juegas al pádel, haces reformas: la reja ya te ha pedido presupuesto.',
+        'Pala de 400€': 'La pala de 400€ tiene más tecnología que tus decisiones: sigue pagando carbono para regalar globos.',
+        'Culpa del Viento': 'El viento vuelve a ser el MVP: sin él tendrías que explicar por qué esa bola acabó en la pista de al lado.',
+        'Prohibido Salir x3': 'Tres intentos de X3 y ni una sale: la pelota ya conoce mejor la verja que tú.',
+        'Pasabolas': 'No fallas una porque no arriesgas ninguna: tu estadística de valentía sigue buscando pista.',
+        'Rey del Globo': 'Tu globo tiene tanto tiempo de vuelo que Playtomic lo registra como actividad aérea.',
+        'Bandeja Letal': 'Bandeja Letal, sí: letal para el ritmo del partido, porque cada una pide una pausa dramática.'
+      };
+      const priority = state.player.traits.find(trait => traitRoasts[trait]);
+      const pool = priority ? [traitRoasts[priority]] : (state.mode === 'troll' ? roastsTroll : roastsFlex);
       const randomRoast = pool[Math.floor(Math.random() * pool.length)];
       state.player.currentRoast = randomRoast;
       document.getElementById('roastTextParagraph').innerText = `"${randomRoast}"`;
@@ -1241,8 +1352,35 @@
       card.style.transform = 'rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
     }
 
-    // High-Resolution 900x1350 Canvas HD Card Generator
-    function downloadCardHD() {
+    let orientationListening = false;
+    async function enableGyroscope() {
+      try {
+        if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
+          const permission = await DeviceOrientationEvent.requestPermission();
+          if (permission !== 'granted') throw new Error('Permiso rechazado');
+        }
+        if (!orientationListening) {
+          window.addEventListener('deviceorientation', handleDeviceOrientation, true);
+          orientationListening = true;
+          showToast('Giroscopio holográfico activado', '📱');
+        }
+      } catch (error) {
+        showToast('Activa el movimiento en Safari para usar el holograma', 'ℹ️');
+      }
+    }
+
+    function handleDeviceOrientation(event) {
+      const card = document.getElementById('finalCardContainer');
+      if (!card || document.getElementById('screen3').classList.contains('hidden')) return;
+      const beta = Math.max(-25, Math.min(25, event.beta || 0));
+      const gamma = Math.max(-25, Math.min(25, event.gamma || 0));
+      card.style.transform = `rotateX(${beta / -2}deg) rotateY(${gamma / 2}deg) scale3d(1.02,1.02,1.02)`;
+      const sheen = document.getElementById('finalHoloSheen');
+      sheen.style.backgroundPosition = `${50 + gamma * 2}% ${50 + beta * 2}%`;
+    }
+
+    // Legacy exporter kept as an internal fallback; production export is defined below.
+    function legacyDownloadCardHD() {
       playSound('click');
       const canvas = document.getElementById('exportCanvas');
       const ctx = canvas.getContext('2d');
@@ -1274,7 +1412,7 @@
       ctx.font = 'bold 28px Rajdhani, sans-serif';
       ctx.fillStyle = '#94A3B8';
       ctx.textAlign = 'center';
-      ctx.fillText('PADEL ULTIMATE CARDS • FUT 26', w / 2, 75);
+      ctx.fillText('PADEL ULTIMATE CARDS • PUT26', w / 2, 75);
 
       // Overall Rating (OVR)
       ctx.textAlign = 'left';
@@ -1430,7 +1568,7 @@
 
         // Trigger Direct Download
         const link = document.createElement('a');
-        link.download = `PadelCard_${state.player.name.replace(/\s+/g, '_')}_FUT.png`;
+        link.download = `PUT26_${state.player.name.replace(/\s+/g, '_')}.png`;
         link.href = canvas.toDataURL('image/png');
         link.click();
 
@@ -1438,10 +1576,111 @@
       }
     }
 
+    async function downloadCardHD() {
+      playSound('click');
+      const canvas = document.getElementById('exportCanvas');
+      const ctx = canvas.getContext('2d');
+      const w = 1080;
+      const h = 1920;
+      canvas.width = w;
+      canvas.height = h;
+      await document.fonts.ready;
+
+      const theme = [
+        { border: '#f59e0b', accent: '#fef3c7', dark: '#17130a' },
+        { border: '#22c55e', accent: '#67e8f9', dark: '#061916' },
+        { border: '#ec4899', accent: '#d8b4fe', dark: '#1c0b22' },
+        { border: '#38bdf8', accent: '#f8fafc', dark: '#0b1730' }
+      ][state.foilThemeIndex];
+      const shieldPath = () => {
+        ctx.beginPath();
+        ctx.moveTo(80, 70); ctx.lineTo(w - 80, 70); ctx.lineTo(w - 45, 105);
+        ctx.lineTo(w - 45, 1620); ctx.lineTo(w - 145, 1780); ctx.lineTo(w / 2, 1850);
+        ctx.lineTo(145, 1780); ctx.lineTo(45, 1620); ctx.lineTo(45, 105); ctx.closePath();
+      };
+      const wrapText = (text, maxWidth, lineHeight, startY) => {
+        const words = text.split(' ');
+        const lines = [];
+        let line = '';
+        words.forEach(word => {
+          const test = line ? `${line} ${word}` : word;
+          if (ctx.measureText(test).width > maxWidth && line) { lines.push(line); line = word; } else line = test;
+        });
+        if (line) lines.push(line);
+        lines.slice(0, 4).forEach((entry, index) => ctx.fillText(entry, w / 2, startY + index * lineHeight));
+      };
+      const loadImage = src => new Promise(resolve => {
+        const image = new Image();
+        image.crossOrigin = 'anonymous';
+        image.onload = () => resolve(image);
+        image.onerror = () => resolve(null);
+        image.src = src;
+      });
+
+      ctx.clearRect(0, 0, w, h);
+      const backdrop = ctx.createRadialGradient(w / 2, 650, 80, w / 2, 900, 1200);
+      backdrop.addColorStop(0, theme.dark); backdrop.addColorStop(1, '#08090c');
+      ctx.fillStyle = backdrop; ctx.fillRect(0, 0, w, h);
+      ctx.save(); shieldPath(); ctx.clip();
+      const foil = ctx.createLinearGradient(0, 0, w, h);
+      foil.addColorStop(0, theme.dark); foil.addColorStop(.45, '#10141d'); foil.addColorStop(1, theme.dark);
+      ctx.fillStyle = foil; ctx.fillRect(0, 0, w, h);
+      ctx.globalAlpha = .16; ctx.strokeStyle = theme.accent; ctx.lineWidth = 2;
+      for (let x = -h; x < w + h; x += 42) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x + h, h); ctx.stroke(); }
+      ctx.globalAlpha = 1;
+      const avatar = await loadImage(state.player.avatarUrl);
+      if (avatar) {
+        ctx.save(); ctx.beginPath(); ctx.rect(470, 150, 500, 760); ctx.clip();
+        const scale = state.player.avatarScale * Math.max(500 / avatar.width, 760 / avatar.height);
+        const aw = avatar.width * scale; const ah = avatar.height * scale;
+        const ax = 720 - aw / 2; const ay = 190 - (ah - 760) / 2 + state.player.avatarPanY * 5;
+        ctx.drawImage(avatar, ax, ay, aw, ah); ctx.restore();
+        const fade = ctx.createLinearGradient(0, 650, 0, 930); fade.addColorStop(0, 'rgba(16,20,29,0)'); fade.addColorStop(1, theme.dark);
+        ctx.fillStyle = fade; ctx.fillRect(430, 600, 580, 340);
+      }
+      ctx.restore();
+      ctx.save(); shieldPath(); ctx.strokeStyle = theme.border; ctx.lineWidth = 22; ctx.stroke();
+      ctx.strokeStyle = 'rgba(255,255,255,.45)'; ctx.lineWidth = 4; ctx.stroke(); ctx.restore();
+
+      ctx.textAlign = 'left'; ctx.fillStyle = '#fff'; ctx.font = '900 170px Rajdhani, sans-serif'; ctx.fillText(String(state.player.ovr), 115, 305);
+      ctx.font = '700 46px Rajdhani, sans-serif'; ctx.fillStyle = theme.accent; ctx.fillText(state.player.side.toUpperCase(), 125, 365);
+      ctx.font = '56px serif'; ctx.fillText(state.player.flag, 125, 440);
+      ctx.textAlign = 'center'; ctx.font = '700 32px Rajdhani, sans-serif'; ctx.fillStyle = '#94a3b8'; ctx.fillText('PADEL ULTIMATE CARDS  •  PUT26', w / 2, 125);
+      ctx.font = '900 70px Rajdhani, sans-serif'; ctx.fillStyle = '#fff'; ctx.fillText(state.player.name.toUpperCase(), w / 2, 955);
+      ctx.font = '700 30px Outfit, sans-serif'; ctx.fillStyle = '#38bdf8'; ctx.fillText(`PLAYTOMIC REAL  •  NIVEL ${Number(state.player.playtomicLevel).toFixed(2)}  ✓`, w / 2, 1010);
+
+      ctx.fillStyle = 'rgba(0,0,0,.7)'; ctx.strokeStyle = 'rgba(255,255,255,.2)'; ctx.lineWidth = 3;
+      ctx.beginPath(); ctx.roundRect(115, 1080, 850, 300, 26); ctx.fill(); ctx.stroke();
+      const stats = [['POT', state.player.stats.POT], ['VOL', state.player.stats.VOL], ['BAN', state.player.stats.BAN], ['VEL', state.player.stats.VEL], ['REF', state.player.stats.REF], ['3TI', state.player.stats['3TI']]];
+      ctx.font = '900 54px Rajdhani, sans-serif'; ctx.textAlign = 'left';
+      stats.forEach((entry, index) => { const x = index % 2 ? 585 : 165; const y = 1155 + Math.floor(index / 2) * 82; ctx.fillStyle = entry[0] === '3TI' ? '#22c55e' : '#fff'; ctx.fillText(`${entry[1]}  ${entry[0]}`, x, y); });
+      ctx.textAlign = 'center'; ctx.font = '700 28px Outfit, sans-serif'; ctx.fillStyle = theme.accent;
+      ctx.fillText(state.player.traits.map(trait => `⚡ ${trait}`).join('   •   '), w / 2, 1490);
+      ctx.fillStyle = '#1a1024'; ctx.strokeStyle = '#ec4899'; ctx.lineWidth = 3; ctx.beginPath(); ctx.roundRect(115, 1570, 850, 210, 24); ctx.fill(); ctx.stroke();
+      ctx.font = 'italic 27px Outfit, sans-serif'; ctx.fillStyle = '#f8fafc'; wrapText(`“${state.player.currentRoast}”`, 750, 42, 1645);
+      ctx.font = '600 24px Outfit, sans-serif'; ctx.fillStyle = '#64748b'; ctx.fillText('padelcards.app  •  TU NIVEL, TU CARTA, TU ROAST', w / 2, 1840);
+
+      const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png', 1));
+      const filename = `PUT26_${state.player.name.replace(/[^a-z0-9]+/gi, '_')}.png`;
+      try {
+        const file = new File([blob], filename, { type: 'image/png' });
+        if (navigator.share && (!navigator.canShare || navigator.canShare({ files: [file] }))) {
+          await navigator.share({ title: 'Mi carta PUT26', text: state.player.currentRoast, files: [file] });
+          showToast('Carta lista para compartir', '📤');
+          return;
+        }
+      } catch (error) {
+        if (error.name === 'AbortError') return;
+      }
+      const link = document.createElement('a'); link.download = filename; link.href = URL.createObjectURL(blob); link.click();
+      setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+      showToast('Carta HD descargada en 1080×1920', '💾');
+    }
+
     function shareOnWhatsApp() {
       playSound('click');
       const p = state.player;
-      const text = `🏆 *CARTA PADEL ULTIMATE FC 26*\n\n` +
+      const text = `🏆 *CARTA PADEL ULTIMATE PUT26*\n\n` +
         `👤 *Jugador:* ${p.name} (${p.side})\n` +
         `⭐ *OVR:* ${p.ovr} | 🛡️ *Playtomic Real:* ${p.playtomicLevel}\n` +
         `📊 *Stats:* POT ${p.stats.POT} | VOL ${p.stats.VOL} | BAN ${p.stats.BAN} | 3TI ${p.stats['3TI']}🍻\n\n` +
@@ -1455,7 +1694,7 @@
     function openInstagramModal() {
       playSound('click');
       const p = state.player;
-      const clipText = `Mi carta FUT de pádel: OVR ${p.ovr} pero Playtomic ${p.playtomicLevel} 😂 "${p.currentRoast}" #PadelCards`;
+      const clipText = `Mi carta PUT26 de pádel: OVR ${p.ovr} pero Playtomic ${p.playtomicLevel} 😂 "${p.currentRoast}" #PadelCards`;
       
       // Copy to clipboard fallback safe
       copyToClipboard(clipText);
