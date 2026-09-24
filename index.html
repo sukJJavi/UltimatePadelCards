@@ -1,0 +1,1509 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Padel Ultimate Cards — FUT Style Cards & Padel Roasts</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Syne & Outfit & Rajdhani for aggressive sports card aesthetic -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Rajdhani:wght@600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tone.js for dynamic futuristic UI sound effects -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js"></script>
+
+  <!-- Tailwind Configuration -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            carbon: '#090B0E',
+            'carbon-card': '#12151B',
+            'carbon-border': '#1E232E',
+            'neon-green': '#22C55E',
+            'neon-cyan': '#06B6D4',
+            'trophy-gold': '#F59E0B',
+            'toxic-purple': '#A855F7',
+            'playtomic-blue': '#0094FF'
+          },
+          fontFamily: {
+            sans: ['Outfit', 'sans-serif'],
+            display: ['Rajdhani', 'sans-serif'],
+            badge: ['Syne', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0d0f12;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1f2937;
+      border-radius: 9999px;
+    }
+
+    /* FUT Card Shape Clip-path */
+    .fut-card-shield {
+      clip-path: polygon(
+        0% 8%,
+        8% 0%,
+        92% 0%,
+        100% 8%,
+        100% 84%,
+        88% 95%,
+        50% 100%,
+        12% 95%,
+        0% 84%
+      );
+    }
+
+    .fut-card-inner-shield {
+      clip-path: polygon(
+        0% 7.5%,
+        7.5% 0%,
+        92.5% 0%,
+        100% 7.5%,
+        100% 83.5%,
+        88% 94.5%,
+        50% 99.5%,
+        12% 94.5%,
+        0% 83.5%
+      );
+    }
+
+    /* Holographic Foil Gradients */
+    .card-foil-gold {
+      background: linear-gradient(135deg, #2b210c 0%, #171a21 35%, #3d2a07 65%, #0f1217 100%);
+      border-color: #f59e0b;
+    }
+    .card-foil-neon {
+      background: linear-gradient(135deg, #062b16 0%, #0d1217 40%, #07353b 75%, #0a111a 100%);
+      border-color: #22c55e;
+    }
+    .card-foil-toxic {
+      background: linear-gradient(135deg, #260c2e 0%, #0e1117 45%, #381223 80%, #090b0e 100%);
+      border-color: #ec4899;
+    }
+    .card-foil-legend {
+      background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 40%, #0284c7 75%, #090d16 100%);
+      border-color: #38bdf8;
+    }
+
+    /* Holographic sheen shine effect */
+    .holo-sheen {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(
+        115deg,
+        transparent 20%,
+        rgba(255, 255, 255, 0.08) 35%,
+        rgba(245, 158, 11, 0.22) 45%,
+        rgba(34, 197, 94, 0.25) 50%,
+        rgba(6, 182, 212, 0.22) 55%,
+        rgba(255, 255, 255, 0.08) 65%,
+        transparent 80%
+      );
+      background-size: 200% 200%;
+      transform: translate3d(0, 0, 0);
+      mix-blend-mode: color-dodge;
+      opacity: 0.85;
+      transition: opacity 0.3s ease;
+    }
+
+    /* 3D tilt perspective */
+    .perspective-container {
+      perspective: 1000px;
+    }
+    .card-tilt-target {
+      transition: transform 0.15s ease-out, box-shadow 0.25s ease;
+      transform-style: preserve-3d;
+    }
+
+    /* Scanning line animation */
+    @keyframes scanAnimation {
+      0% { top: 0%; opacity: 0; }
+      15% { opacity: 1; }
+      85% { opacity: 1; }
+      100% { top: 100%; opacity: 0; }
+    }
+    .scanner-beam {
+      animation: scanAnimation 1.8s infinite ease-in-out;
+    }
+
+    /* Custom range slider thumb */
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      height: 18px;
+      width: 18px;
+      border-radius: 9999px;
+      background: #22c55e;
+      border: 2px solid #ffffff;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.8);
+      margin-top: -6px;
+    }
+    input[type=range]::-moz-range-thumb {
+      height: 18px;
+      width: 18px;
+      border-radius: 9999px;
+      background: #22c55e;
+      border: 2px solid #ffffff;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.8);
+    }
+    input[type=range]::-webkit-slider-runnable-track {
+      height: 6px;
+      background: #1f2937;
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+
+<body class="bg-[#08090C] text-slate-100 min-h-screen flex flex-col items-center antialiased selection:bg-neon-green selection:text-black">
+  
+  <!-- Main Mobile App Shell (390px styled viewport container, scales gracefully on desktop) -->
+  <div class="w-full max-w-[440px] min-h-screen bg-carbon flex flex-col shadow-2xl relative border-x border-carbon-border pb-12 overflow-x-hidden">
+    
+    <!-- Top Navigation Bar -->
+    <header class="sticky top-0 z-40 bg-carbon/90 backdrop-blur-md border-b border-carbon-border px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-neon-green to-neon-cyan flex items-center justify-center shadow-lg shadow-neon-green/20">
+          <svg class="w-5 h-5 text-black" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z"/>
+          </svg>
+        </div>
+        <div>
+          <h1 class="text-xs font-black tracking-wider uppercase text-white font-display flex items-center gap-1.5">
+            PADEL ULTIMATE <span class="bg-gradient-to-r from-neon-green to-neon-cyan bg-clip-text text-transparent">CARDS</span>
+          </h1>
+          <p class="text-[9px] text-slate-400 font-medium tracking-tight">FUT 26 • ROAST EDITION</p>
+        </div>
+      </div>
+
+      <!-- Quick Audio & Help Buttons -->
+      <div class="flex items-center gap-2">
+        <button id="soundToggleBtn" onclick="toggleAudio()" class="w-8 h-8 rounded-full bg-carbon-card border border-carbon-border flex items-center justify-center text-slate-400 hover:text-white transition">
+          <svg id="soundIconOn" class="w-4 h-4 text-neon-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+          </svg>
+          <svg id="soundIconOff" class="w-4 h-4 text-slate-500 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
+          </svg>
+        </button>
+        <span class="text-[10px] bg-carbon-border px-2 py-0.5 rounded-full text-neon-green font-mono font-bold">BETA 2.4</span>
+      </div>
+    </header>
+
+    <!-- App Body containing the 3 screens -->
+    <main class="flex-1 flex flex-col p-4 relative">
+      
+      <!-- ========================================== -->
+      <!-- SCREEN 1: LANDING & ONBOARDING            -->
+      <!-- ========================================== -->
+      <section id="screen1" class="flex flex-col gap-5 py-2 transition-all duration-300">
+        <!-- Hero Header -->
+        <div class="space-y-2 text-center pt-2">
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-neon-green/10 border border-neon-green/30 text-neon-green text-xs font-semibold">
+            <span class="w-2 h-2 rounded-full bg-neon-green animate-ping"></span>
+            Generador Oficial de Cartas FUT & Roasts
+          </div>
+          <h2 class="text-3xl font-black text-white font-display tracking-tight leading-none uppercase">
+            Crea tu carta definitiva.<br>
+            <span class="bg-gradient-to-r from-neon-green via-neon-cyan to-trophy-gold bg-clip-text text-transparent">Destapa tu nivel real.</span>
+          </h2>
+          <p class="text-xs text-slate-400 max-w-xs mx-auto">
+            Convierte a cualquier padelero en un cromo de FIFA con estadísticas infladas y un roast sin anestesia.
+          </p>
+        </div>
+
+        <!-- Mode Selection Cards -->
+        <div class="space-y-3">
+          <p class="text-[11px] font-bold uppercase tracking-wider text-slate-400">1. Selecciona Modo de Creación:</p>
+          <div class="grid grid-cols-2 gap-3">
+            <!-- Mode 1: Mi Carta (Flex) -->
+            <button type="button" onclick="selectMode('flex')" id="modeFlexBtn" 
+              class="relative text-left p-3.5 rounded-xl bg-carbon-card border-2 border-neon-green/80 shadow-lg shadow-neon-green/10 transition-all flex flex-col justify-between h-36 group">
+              <div class="flex justify-between items-start">
+                <span class="text-2xl">👑</span>
+                <span class="mode-badge text-[9px] font-extrabold uppercase px-2 py-0.5 rounded bg-neon-green text-black">Activo</span>
+              </div>
+              <div>
+                <p class="text-sm font-black text-white group-hover:text-neon-green transition">Mi Carta</p>
+                <p class="text-[10px] text-slate-400 leading-tight mt-0.5">Flex Mode • Auto-hype salvaje y stats legendarias.</p>
+              </div>
+            </button>
+
+            <!-- Mode 2: Mi Pareja (Troll) -->
+            <button type="button" onclick="selectMode('troll')" id="modeTrollBtn" 
+              class="relative text-left p-3.5 rounded-xl bg-carbon-card border border-carbon-border hover:border-pink-500/50 transition-all flex flex-col justify-between h-36 group">
+              <div class="flex justify-between items-start">
+                <span class="text-2xl">🤡</span>
+                <span class="mode-badge text-[9px] font-extrabold uppercase px-2 py-0.5 rounded bg-carbon-border text-slate-400">Troll</span>
+              </div>
+              <div>
+                <p class="text-sm font-black text-white group-hover:text-pink-400 transition">Para mi Pareja</p>
+                <p class="text-[10px] text-slate-400 leading-tight mt-0.5">Roast despiadado • Sácale sus vergüenzas de la pista.</p>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Playtomic Verification Dropzone -->
+        <div class="rounded-2xl p-4 bg-gradient-to-b from-[#0a1524] to-carbon-card border border-playtomic-blue/30 relative overflow-hidden group">
+          <div class="absolute -right-10 -bottom-10 w-32 h-32 bg-playtomic-blue/10 rounded-full blur-2xl pointer-events-none"></div>
+          
+          <div class="flex items-center gap-2 mb-2">
+            <span class="w-6 h-6 rounded-md bg-playtomic-blue/20 text-playtomic-blue flex items-center justify-center font-bold text-xs">P</span>
+            <span class="text-xs font-bold text-white tracking-wide">VERIFICACIÓN PLAYTOMIC FAST-SCAN</span>
+            <span class="ml-auto text-[9px] bg-playtomic-blue text-white font-black px-1.5 py-0.5 rounded">OCR IA</span>
+          </div>
+
+          <!-- Drop Area -->
+          <div id="dropzoneBox" onclick="simulatePlaytomicScan()" class="border-2 border-dashed border-playtomic-blue/40 rounded-xl p-4 text-center cursor-pointer hover:border-playtomic-blue hover:bg-playtomic-blue/5 transition relative overflow-hidden">
+            <!-- Simulated Scanning Beam Effect (Hidden by default) -->
+            <div id="ocrLaserBeam" class="hidden absolute left-0 right-0 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_12px_cyan] scanner-beam z-10"></div>
+            
+            <div id="dropzoneIdle">
+              <svg class="w-8 h-8 mx-auto text-playtomic-blue mb-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              <p class="text-xs font-bold text-white">Sube captura de tu perfil de Playtomic</p>
+              <p class="text-[10px] text-slate-400 mt-0.5">Toca aquí para escanear nivel, foto y stats en 1 segundo</p>
+            </div>
+
+            <!-- Scanning State UI -->
+            <div id="dropzoneScanning" class="hidden py-1">
+              <div class="inline-block animate-spin text-playtomic-blue mb-2">
+                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                </svg>
+              </div>
+              <p class="text-xs font-black text-cyan-400 tracking-wider font-mono">EXTRAYENDO OCR PLAYTOMIC...</p>
+              <p class="text-[10px] text-slate-300">Detectado: Nivel 3.42 • Winrate 48% • Pala Siux</p>
+            </div>
+          </div>
+
+          <div class="mt-2.5 flex items-center justify-between text-[10px] text-slate-400 px-1">
+            <span>🛡️ Verificación anti-fantasma</span>
+            <span class="text-cyan-400 font-medium">Extraer nivel real garantizado</span>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3 text-slate-600 text-xs">
+          <div class="h-px bg-carbon-border flex-1"></div>
+          <span class="text-[11px] font-medium text-slate-400 uppercase tracking-widest">— o introduce tus datos a mano —</span>
+          <div class="h-px bg-carbon-border flex-1"></div>
+        </div>
+
+        <!-- Primary CTA to Screen 2 -->
+        <button onclick="goToEditor()" class="w-full py-4 rounded-xl bg-gradient-to-r from-neon-green to-emerald-400 text-black font-extrabold text-base tracking-wide uppercase font-display shadow-lg shadow-neon-green/30 hover:brightness-110 active:scale-[0.98] transition flex items-center justify-center gap-2">
+          <span>Empezar Carta</span>
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+          </svg>
+        </button>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- SCREEN 2: CARD EDITOR & STATS BUILDER     -->
+      <!-- ========================================== -->
+      <section id="screen2" class="hidden flex-col gap-4 py-1">
+        
+        <!-- Top Sticky Subheader with Navigation -->
+        <div class="flex items-center justify-between">
+          <button onclick="goToLanding()" class="text-xs text-slate-400 hover:text-white flex items-center gap-1 py-1">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+            Volver
+          </button>
+          <div class="flex items-center gap-1.5">
+            <span id="editorModeTag" class="text-[10px] font-black uppercase px-2 py-0.5 rounded bg-neon-green/20 text-neon-green border border-neon-green/30">MODO FLEX</span>
+            <span class="text-[10px] font-mono text-slate-400">Paso 2/3</span>
+          </div>
+        </div>
+
+        <!-- Interactive Mini Live Preview Canvas -->
+        <div class="perspective-container flex justify-center py-1">
+          <div id="miniCardPreview" class="card-tilt-target w-64 fut-card-shield p-[3px] shadow-2xl relative cursor-pointer" onclick="cycleCardFoil()">
+            <!-- Outer dynamic border glow -->
+            <div id="miniFoilBorder" class="fut-card-shield card-foil-gold p-3 h-full flex flex-col justify-between relative overflow-hidden">
+              <div class="holo-sheen"></div>
+              
+              <!-- Card Top Header (OVR + Position + Flags) -->
+              <div class="flex justify-between items-start relative z-10">
+                <div class="flex flex-col items-center">
+                  <span id="miniCardOvr" class="text-3xl font-black font-display leading-none text-white drop-shadow">91</span>
+                  <span id="miniCardPos" class="text-[10px] font-black tracking-widest text-trophy-gold uppercase font-mono mt-0.5">REVÉS</span>
+                  <span id="miniCardFlag" class="text-sm mt-0.5">🇪🇸</span>
+                  <span id="miniClubBadge" class="text-[9px] font-extrabold text-slate-300 mt-0.5">PADEL FC</span>
+                </div>
+
+                <!-- Live Photo / Silhouette Cutout Placeholder -->
+                <div class="relative w-36 h-36 -mr-2 -mt-1 flex items-end justify-center overflow-hidden">
+                  <img id="miniCardAvatarImg" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" alt="Player" class="w-full h-full object-cover object-top mask-image" onerror="this.src='https://placehold.co/200x200/171a21/22c55e?text=PADEL'" />
+                  <!-- Gradient fade bottom of avatar -->
+                  <div class="absolute inset-0 bg-gradient-to-t from-[#12151B] via-transparent to-transparent"></div>
+                </div>
+              </div>
+
+              <!-- Player Name Bar -->
+              <div class="relative z-10 text-center -mt-2">
+                <h3 id="miniCardName" class="text-sm font-black tracking-wider uppercase font-display text-white truncate px-1">PAQUITO VIP</h3>
+                <div class="flex items-center justify-center gap-1 text-[9px] font-mono text-neon-green font-bold">
+                  <span>PT:</span>
+                  <span id="miniCardPtBadge" class="bg-carbon/80 px-1 rounded border border-playtomic-blue text-cyan-300">3.42</span>
+                </div>
+              </div>
+
+              <!-- Mini Stats 6-Pack Matrix -->
+              <div class="relative z-10 grid grid-cols-2 gap-x-2 gap-y-0.5 text-[9px] font-bold font-mono px-3 py-1.5 bg-black/40 rounded-lg mt-1 border border-white/5">
+                <div class="flex justify-between">
+                  <span class="text-slate-400">POT</span>
+                  <span id="miniStatPOT" class="text-white">94</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-slate-400">VOL</span>
+                  <span id="miniStatVOL" class="text-white">88</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-slate-400">BAN</span>
+                  <span id="miniStatBAN" class="text-white">86</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-slate-400">VEL</span>
+                  <span id="miniStatVEL" class="text-white">90</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-slate-400">REF</span>
+                  <span id="miniStatREF" class="text-white">89</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-neon-green">3TI</span>
+                  <span id="miniStat3TI" class="text-neon-green font-extrabold">99</span>
+                </div>
+              </div>
+
+              <!-- Mini Playstyles Badges -->
+              <div id="miniPlaystylesTray" class="relative z-10 flex justify-center gap-1 mt-1 pb-1">
+                <span class="text-[8px] px-1.5 py-0.5 rounded bg-trophy-gold/20 text-trophy-gold border border-trophy-gold/40 font-bold">La Nevera</span>
+                <span class="text-[8px] px-1.5 py-0.5 rounded bg-neon-cyan/20 text-neon-cyan border border-neon-cyan/40 font-bold">Bandeja Letal</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-center text-[10px] text-slate-400 -mt-2">✨ Toca la carta para cambiar el estilo holográfico (Oro / Neón / Toxic / Icon)</p>
+
+        <!-- Form Controls Group -->
+        <div class="space-y-4 bg-carbon-card p-3.5 rounded-2xl border border-carbon-border">
+          
+          <!-- 1. Profile Info -->
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">1. Datos del Jugador</label>
+            <div class="grid grid-cols-2 gap-2 mb-2">
+              <div>
+                <span class="text-[10px] text-slate-400">Nombre / Apodo:</span>
+                <input type="text" id="inputPlayerName" value="Paquito Master" maxlength="16" oninput="updateCardLive()" 
+                  class="w-full mt-1 px-3 py-2 rounded-lg bg-carbon border border-carbon-border text-white text-xs font-bold focus:border-neon-green focus:outline-none">
+              </div>
+              <div>
+                <span class="text-[10px] text-slate-400">Lado Favorito:</span>
+                <select id="inputPlayerSide" onchange="updateCardLive()" 
+                  class="w-full mt-1 px-2.5 py-2 rounded-lg bg-carbon border border-carbon-border text-white text-xs font-bold focus:border-neon-green focus:outline-none">
+                  <option value="Revés">Revés (Se cree Lebrón)</option>
+                  <option value="Drive">Drive (Currante)</option>
+                  <option value="Indeciso">Ambos (Confusión pura)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Avatar & Flag Selectors -->
+            <div class="grid grid-cols-2 gap-2">
+              <div>
+                <span class="text-[10px] text-slate-400">Nacionalidad:</span>
+                <select id="inputPlayerFlag" onchange="updateCardLive()" class="w-full mt-1 px-2 py-1.5 rounded-lg bg-carbon border border-carbon-border text-white text-xs">
+                  <option value="🇪🇸">🇪🇸 España</option>
+                  <option value="🇦🇷">🇦🇷 Argentina</option>
+                  <option value="🇲🇽">🇲🇽 México</option>
+                  <option value="🇮🇹">🇮🇹 Italia</option>
+                  <option value="🇵🇹">🇵🇹 Portugal</option>
+                  <option value="🇫🇷">🇫🇷 Francia</option>
+                  <option value="🇸🇪">🇸🇪 Suecia</option>
+                  <option value="🇨🇱">🇨🇱 Chile</option>
+                </select>
+              </div>
+
+              <div>
+                <span class="text-[10px] text-slate-400">Foto / Avatar:</span>
+                <div class="flex items-center gap-1.5 mt-1">
+                  <input type="file" id="fileUploadAvatar" accept="image/*" class="hidden" onchange="handleAvatarUpload(event)">
+                  <button type="button" onclick="document.getElementById('fileUploadAvatar').click()" class="flex-1 py-1.5 px-2 rounded-lg bg-carbon border border-carbon-border text-slate-300 hover:text-white text-[10px] font-bold flex items-center justify-center gap-1">
+                    <svg class="w-3.5 h-3.5 text-neon-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
+                    Subir Foto
+                  </button>
+                  <button type="button" onclick="cyclePresetAvatars()" class="py-1.5 px-2 rounded-lg bg-carbon border border-carbon-border text-slate-300 text-[10px] font-bold" title="Cambiar Preset">
+                    🎲
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Level Input (Playtomic Real) -->
+          <div class="pt-2 border-t border-carbon-border">
+            <div class="flex items-center justify-between mb-1">
+              <label class="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
+                <span>2. Nivel Playtomic Verificado</span>
+                <svg class="w-3.5 h-3.5 text-playtomic-blue" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+              </label>
+              <span id="levelValueDisplay" class="font-mono text-xs font-black text-playtomic-blue bg-playtomic-blue/10 px-2 py-0.5 rounded border border-playtomic-blue/30">3.42</span>
+            </div>
+            
+            <div class="flex items-center gap-3">
+              <span class="text-[10px] text-slate-500 font-mono">1.00</span>
+              <input type="range" id="inputPlaytomicLevel" min="1.0" max="7.0" step="0.05" value="3.42" oninput="updateLevelInput(this.value)" class="w-full">
+              <span class="text-[10px] text-slate-500 font-mono">7.00</span>
+            </div>
+            <p class="text-[9px] text-slate-400 mt-1">Este número se estampará en la carta final para contrastar con tu OVR inflado.</p>
+          </div>
+
+          <!-- 3. Inflated Stats Sliders -->
+          <div class="pt-2 border-t border-carbon-border">
+            <div class="flex items-center justify-between mb-2">
+              <label class="text-xs font-bold uppercase tracking-wider text-slate-300">3. Stats Infladas (1 - 99)</label>
+              <button type="button" onclick="randomizeStats()" class="text-[10px] text-neon-green hover:underline font-mono">🎲 Max Out Fantasmada</button>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3 text-xs">
+              <!-- POT -->
+              <div>
+                <div class="flex justify-between text-[11px] font-mono font-bold mb-0.5">
+                  <span class="text-slate-400">POT (Potencia):</span>
+                  <span id="valPOT" class="text-white">94</span>
+                </div>
+                <input type="range" id="sliderPOT" min="30" max="99" value="94" oninput="updateStat('POT', this.value)" class="w-full">
+              </div>
+
+              <!-- VOL -->
+              <div>
+                <div class="flex justify-between text-[11px] font-mono font-bold mb-0.5">
+                  <span class="text-slate-400">VOL (Volea):</span>
+                  <span id="valVOL" class="text-white">88</span>
+                </div>
+                <input type="range" id="sliderVOL" min="30" max="99" value="88" oninput="updateStat('VOL', this.value)" class="w-full">
+              </div>
+
+              <!-- BAN -->
+              <div>
+                <div class="flex justify-between text-[11px] font-mono font-bold mb-0.5">
+                  <span class="text-slate-400">BAN (Bandeja):</span>
+                  <span id="valBAN" class="text-white">86</span>
+                </div>
+                <input type="range" id="sliderBAN" min="30" max="99" value="86" oninput="updateStat('BAN', this.value)" class="w-full">
+              </div>
+
+              <!-- VEL -->
+              <div>
+                <div class="flex justify-between text-[11px] font-mono font-bold mb-0.5">
+                  <span class="text-slate-400">VEL (Velocidad):</span>
+                  <span id="valVEL" class="text-white">90</span>
+                </div>
+                <input type="range" id="sliderVEL" min="30" max="99" value="90" oninput="updateStat('VEL', this.value)" class="w-full">
+              </div>
+
+              <!-- REF -->
+              <div>
+                <div class="flex justify-between text-[11px] font-mono font-bold mb-0.5">
+                  <span class="text-slate-400">REF (Reflejos):</span>
+                  <span id="valREF" class="text-white">89</span>
+                </div>
+                <input type="range" id="sliderREF" min="30" max="99" value="89" oninput="updateStat('REF', this.value)" class="w-full">
+              </div>
+
+              <!-- 3TI (Cerveza) -->
+              <div>
+                <div class="flex justify-between text-[11px] font-mono font-bold mb-0.5">
+                  <span class="text-neon-green">3TI (3er Tiempo 🍻):</span>
+                  <span id="val3TI" class="text-neon-green font-extrabold">99</span>
+                </div>
+                <input type="range" id="slider3TI" min="50" max="99" value="99" oninput="updateStat('3TI', this.value)" class="w-full accent-neon-green">
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. Playstyle Traits Selector (Pick up to 2) -->
+          <div class="pt-2 border-t border-carbon-border">
+            <div class="flex items-center justify-between mb-2">
+              <label class="text-xs font-bold uppercase tracking-wider text-slate-300">4. Playstyles Padel (Máx 2)</label>
+              <span id="traitsSelectedCounter" class="text-[10px] font-mono text-neon-green">2/2 seleccionados</span>
+            </div>
+
+            <div class="flex flex-wrap gap-1.5" id="traitsContainer">
+              <!-- Trait Chips -->
+              <button type="button" onclick="toggleTrait('La Nevera')" data-trait="La Nevera" class="trait-pill px-2.5 py-1 rounded-full text-xs font-bold border transition bg-neon-green/20 border-neon-green text-neon-green">
+                ❄️ La Nevera
+              </button>
+              <button type="button" onclick="toggleTrait('Rey del Globo')" data-trait="Rey del Globo" class="trait-pill px-2.5 py-1 rounded-full text-xs font-bold border transition bg-carbon border-carbon-border text-slate-400 hover:text-white">
+                🎈 Rey del Globo
+              </button>
+              <button type="button" onclick="toggleTrait('Pasabolas')" data-trait="Pasabolas" class="trait-pill px-2.5 py-1 rounded-full text-xs font-bold border transition bg-carbon border-carbon-border text-slate-400 hover:text-white">
+                🎾 Pasabolas
+              </button>
+              <button type="button" onclick="toggleTrait('Rompe Cristales')" data-trait="Rompe Cristales" class="trait-pill px-2.5 py-1 rounded-full text-xs font-bold border transition bg-carbon border-carbon-border text-slate-400 hover:text-white">
+                💥 Rompe Cristales
+              </button>
+              <button type="button" onclick="toggleTrait('Culpa del Viento')" data-trait="Culpa del Viento" class="trait-pill px-2.5 py-1 rounded-full text-xs font-bold border transition bg-carbon border-carbon-border text-slate-400 hover:text-white">
+                💨 Culpa del Viento
+              </button>
+              <button type="button" onclick="toggleTrait('Bandeja Letal')" data-trait="Bandeja Letal" class="trait-pill px-2.5 py-1 rounded-full text-xs font-bold border transition bg-neon-green/20 border-neon-green text-neon-green">
+                🔥 Bandeja Letal
+              </button>
+              <button type="button" onclick="toggleTrait('Pala de 400€')" data-trait="Pala de 400€" class="trait-pill px-2.5 py-1 rounded-full text-xs font-bold border transition bg-carbon border-carbon-border text-slate-400 hover:text-white">
+                💸 Pala de 400€
+              </button>
+              <button type="button" onclick="toggleTrait('Prohibido Salir x3')" data-trait="Prohibido Salir x3" class="trait-pill px-2.5 py-1 rounded-full text-xs font-bold border transition bg-carbon border-carbon-border text-slate-400 hover:text-white">
+                🚪 Intento de X3
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Button: Generate Roast & Card -->
+        <button onclick="generateRoastAndCard()" class="w-full py-4 rounded-xl bg-gradient-to-r from-trophy-gold via-amber-400 to-neon-green text-black font-black text-base uppercase font-display tracking-wider shadow-xl shadow-trophy-gold/20 hover:brightness-110 active:scale-[0.98] transition flex items-center justify-center gap-2">
+          <span>Generar Roast & Carta 🔥</span>
+        </button>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- SCREEN 3: VIRAL OUTPUT & ROAST            -->
+      <!-- ========================================== -->
+      <section id="screen3" class="hidden flex-col gap-5 py-1">
+        
+        <!-- Header Controls -->
+        <div class="flex items-center justify-between">
+          <button onclick="goToEditor()" class="text-xs text-slate-400 hover:text-white flex items-center gap-1">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+            Editar Stats
+          </button>
+          <div class="flex items-center gap-2">
+            <span class="text-[10px] font-mono text-neon-green bg-neon-green/10 border border-neon-green/30 px-2 py-0.5 rounded-full font-bold">CARTA GENERADA</span>
+          </div>
+        </div>
+
+        <!-- The High-Res FUT Card Showcase with 3D Tilt Effect -->
+        <div class="perspective-container flex justify-center pt-1 pb-2">
+          <div id="finalCardContainer" class="card-tilt-target relative w-[310px] fut-card-shield p-[3.5px] shadow-[0_20px_50px_rgba(0,0,0,0.85)] cursor-pointer group" onmousemove="handleCardTilt(event)" onmouseleave="resetCardTilt()" ontouchmove="handleCardTouchMove(event)" ontouchend="resetCardTilt()">
+            
+            <!-- Dynamic Foil Shell & Theme -->
+            <div id="finalCardFoil" class="fut-card-shield card-foil-gold h-full p-4 flex flex-col justify-between relative overflow-hidden">
+              
+              <!-- Holographic Sheen layer -->
+              <div id="finalHoloSheen" class="holo-sheen"></div>
+              
+              <!-- Carbon Mesh Texture Background Grid -->
+              <div class="absolute inset-0 opacity-20 pointer-events-none bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:12px_12px]"></div>
+
+              <!-- Top Header: OVR + Position + Playtomic Real Stamp -->
+              <div class="relative z-10 flex justify-between items-start">
+                
+                <!-- Left Stack: OVR, Side, Flag -->
+                <div class="flex flex-col items-start pl-1 pt-1">
+                  <div class="relative">
+                    <span id="finalCardOvr" class="text-5xl font-black font-display text-white tracking-tighter leading-none drop-shadow-[0_4px_8px_rgba(0,0,0,0.8)]">91</span>
+                  </div>
+                  <span id="finalCardPos" class="text-xs font-black tracking-widest text-trophy-gold uppercase font-mono mt-0.5">REVÉS</span>
+                  
+                  <div class="flex items-center gap-1.5 mt-1.5">
+                    <span id="finalCardFlag" class="text-lg">🇪🇸</span>
+                    <span class="text-[10px] font-black uppercase text-slate-300 font-mono tracking-wider">WPT</span>
+                  </div>
+                </div>
+
+                <!-- Right Stack: Big Avatar Cutout blending with background -->
+                <div class="relative w-44 h-48 -mr-3 -mt-2 flex items-end justify-center">
+                  <img id="finalCardAvatarImg" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" alt="Player Cutout" class="w-full h-full object-cover object-top mask-image drop-shadow-[0_10px_15px_rgba(0,0,0,0.7)]" onerror="this.src='https://placehold.co/300x300/171a21/22c55e?text=PADEL'" />
+                  <!-- Blend Gradient -->
+                  <div class="absolute inset-0 bg-gradient-to-t from-[#12151B] via-transparent to-transparent"></div>
+                </div>
+              </div>
+
+              <!-- Playtomic Reality Check Stamp (Juxtaposed reality badge) -->
+              <div class="relative z-20 -mt-7 mx-auto w-full px-2">
+                <div class="bg-carbon-card/90 backdrop-blur-md border border-playtomic-blue/60 rounded-lg p-1.5 flex items-center justify-between shadow-lg">
+                  <div class="flex items-center gap-1.5">
+                    <span class="w-4 h-4 rounded-full bg-playtomic-blue text-white flex items-center justify-center text-[9px] font-black">P</span>
+                    <span class="text-[9px] font-extrabold uppercase text-slate-300 tracking-wider">Playtomic Real:</span>
+                  </div>
+                  <div class="flex items-center gap-1">
+                    <span id="finalCardPlaytomic" class="font-mono text-xs font-black text-cyan-400">3.42</span>
+                    <span class="text-[8px] bg-playtomic-blue/20 text-playtomic-blue font-bold px-1 rounded uppercase">Verificado</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Player Name Banner -->
+              <div class="relative z-10 text-center mt-2">
+                <h3 id="finalCardName" class="text-xl font-black tracking-wider uppercase font-display text-white drop-shadow truncate px-2">PAQUITO MASTER</h3>
+                <div class="h-0.5 w-24 bg-gradient-to-r from-transparent via-trophy-gold to-transparent mx-auto mt-0.5"></div>
+              </div>
+
+              <!-- 6 Stats Grid (FUT Style) -->
+              <div class="relative z-10 grid grid-cols-2 gap-x-4 gap-y-1 text-xs font-mono font-black px-4 py-2 bg-black/50 rounded-xl mt-2 border border-white/10 backdrop-blur-sm">
+                <!-- Col 1 -->
+                <div class="space-y-1">
+                  <div class="flex justify-between items-center border-b border-white/5 pb-0.5">
+                    <span class="text-slate-400 text-[10px]">POT</span>
+                    <span id="finalStatPOT" class="text-white text-sm">94</span>
+                  </div>
+                  <div class="flex justify-between items-center border-b border-white/5 pb-0.5">
+                    <span class="text-slate-400 text-[10px]">VOL</span>
+                    <span id="finalStatVOL" class="text-white text-sm">88</span>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span class="text-slate-400 text-[10px]">BAN</span>
+                    <span id="finalStatBAN" class="text-white text-sm">86</span>
+                  </div>
+                </div>
+
+                <!-- Col 2 -->
+                <div class="space-y-1">
+                  <div class="flex justify-between items-center border-b border-white/5 pb-0.5">
+                    <span class="text-slate-400 text-[10px]">VEL</span>
+                    <span id="finalStatVEL" class="text-white text-sm">90</span>
+                  </div>
+                  <div class="flex justify-between items-center border-b border-white/5 pb-0.5">
+                    <span class="text-slate-400 text-[10px]">REF</span>
+                    <span id="finalStatREF" class="text-white text-sm">89</span>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span class="text-neon-green text-[10px]">3TI</span>
+                    <span id="finalStat3TI" class="text-neon-green text-sm font-extrabold">99</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Selected Playstyle Badges Bottom Row -->
+              <div id="finalCardTraits" class="relative z-10 flex justify-center items-center gap-1.5 mt-2 pb-1">
+                <span class="text-[9px] px-2 py-0.5 rounded-full bg-trophy-gold/20 text-trophy-gold border border-trophy-gold/40 font-bold flex items-center gap-1">
+                  <span>❄️</span> La Nevera
+                </span>
+                <span class="text-[9px] px-2 py-0.5 rounded-full bg-neon-cyan/20 text-neon-cyan border border-neon-cyan/40 font-bold flex items-center gap-1">
+                  <span>🔥</span> Bandeja Letal
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- The Roast Speech Bubble (Pinned below card) -->
+        <div class="relative bg-gradient-to-br from-[#1c1328] to-carbon-card border border-pink-500/40 rounded-2xl p-4 shadow-xl shadow-pink-500/5">
+          <!-- Speech arrow indicator -->
+          <div class="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-[#1c1328] border-t border-l border-pink-500/40 rotate-45"></div>
+
+          <div class="flex items-center justify-between mb-1.5">
+            <div class="flex items-center gap-1.5">
+              <span class="text-sm">🔥</span>
+              <span class="text-xs font-black text-pink-400 uppercase tracking-wider font-display">EL ROAST DEL CLUB</span>
+            </div>
+            <button onclick="rerollRoast()" class="text-[10px] text-slate-300 hover:text-white font-mono flex items-center gap-1 bg-white/5 hover:bg-white/10 px-2 py-1 rounded-lg border border-white/10 transition active:scale-95">
+              <span>Regenerar Roast</span>
+              <span class="text-pink-400">🔄</span>
+            </button>
+          </div>
+
+          <p id="roastTextParagraph" class="text-xs text-slate-200 leading-relaxed italic font-medium">
+            "Mucho 95 de remate y pala de carbono de 380€, pero llevas 6 meses sin salir de Drive porque te dan un pánico visceral las paredes de cristal."
+          </p>
+
+          <div class="mt-2.5 pt-2 border-t border-white/10 flex items-center justify-between text-[10px] text-slate-400">
+            <span id="roastTargetBadge" class="text-neon-cyan font-bold">🎯 Modo: Flex Roast</span>
+            <span class="font-mono text-slate-500">100% Precisión Padelera</span>
+          </div>
+        </div>
+
+        <!-- Bottom Share Actions -->
+        <div class="space-y-2.5 pt-1">
+          <!-- Primary: WhatsApp Share -->
+          <button onclick="shareOnWhatsApp()" class="w-full py-3.5 rounded-xl bg-[#25D366] text-black font-extrabold text-sm uppercase font-display tracking-wider shadow-lg shadow-[#25D366]/20 hover:brightness-110 active:scale-[0.98] transition flex items-center justify-center gap-2">
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+              <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+            </svg>
+            <span>Compartir en WhatsApp</span>
+          </button>
+
+          <!-- Secondary Row: HD Download & Instagram Stories -->
+          <div class="grid grid-cols-2 gap-2">
+            <button onclick="downloadCardHD()" id="downloadBtn" class="py-3 px-2 rounded-xl bg-carbon-card border border-carbon-border hover:border-white/30 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition active:scale-95">
+              <svg class="w-4 h-4 text-trophy-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+              <span>Descargar HD</span>
+            </button>
+
+            <button onclick="openInstagramModal()" class="py-3 px-2 rounded-xl bg-gradient-to-r from-purple-900/40 to-pink-900/40 border border-pink-500/30 hover:border-pink-500 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition active:scale-95">
+              <svg class="w-4 h-4 text-pink-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+              <span>Insta Stories</span>
+            </button>
+          </div>
+
+          <!-- Subtle Branding Footer -->
+          <div class="text-center pt-2">
+            <span class="text-[10px] font-mono text-slate-500 uppercase tracking-widest">padelcards.app • No te piques bro</span>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Hidden Canvas for crisp HD image generation and download -->
+    <canvas id="exportCanvas" width="900" height="1350" class="hidden"></canvas>
+
+    <!-- Custom Notification Toast Modal (No browser alerts!) -->
+    <div id="toastNotification" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none max-w-xs w-full px-4">
+      <div id="toastBox" class="bg-carbon-card border border-neon-green/60 text-white rounded-xl p-3 shadow-2xl flex items-center gap-3">
+        <span id="toastIcon" class="text-xl">⚡</span>
+        <div class="flex-1">
+          <p id="toastTitle" class="text-xs font-black uppercase text-neon-green">Notificación</p>
+          <p id="toastMsg" class="text-[11px] text-slate-300">Mensaje de prueba</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Instagram Stories Guide Modal -->
+    <div id="instaModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+      <div class="bg-carbon-card border border-carbon-border rounded-2xl max-w-xs w-full p-4 space-y-3 text-center">
+        <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-amber-500 via-pink-500 to-purple-600 mx-auto flex items-center justify-center text-white text-2xl shadow-lg">
+          📸
+        </div>
+        <h4 class="text-sm font-black text-white uppercase tracking-wider">Publicar en Instagram</h4>
+        <p class="text-xs text-slate-300">
+          Hemos preparado la imagen de la carta y copiado el roast al portapapeles. Abre Instagram Stories y añádela como sticker o foto.
+        </p>
+        <div class="bg-carbon p-2.5 rounded-lg border border-carbon-border text-[11px] text-left text-slate-300 italic">
+          <span class="text-pink-400 font-bold block mb-1">Texto copiado:</span>
+          <span id="instaCopiedSnippet">...</span>
+        </div>
+        <div class="flex gap-2 pt-1">
+          <button onclick="closeInstagramModal()" class="flex-1 py-2 rounded-lg bg-carbon border border-carbon-border text-xs text-slate-300 hover:text-white font-bold">
+            Cerrar
+          </button>
+          <button onclick="downloadCardHD(); closeInstagramModal();" class="flex-1 py-2 rounded-lg bg-pink-600 hover:bg-pink-500 text-xs text-white font-extrabold">
+            Bajar Imagen
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // State Data Store
+    const state = {
+      mode: 'flex', // 'flex' or 'troll'
+      foilThemeIndex: 0,
+      foilThemes: ['card-foil-gold', 'card-foil-neon', 'card-foil-toxic', 'card-foil-legend'],
+      themeNames: ['Oro Rare', 'Neon Flash', 'Toxic Roast', 'Icon Legend'],
+      soundEnabled: true,
+      player: {
+        name: 'Paquito Master',
+        side: 'Revés',
+        flag: '🇪🇸',
+        playtomicLevel: 3.42,
+        ovr: 91,
+        stats: {
+          POT: 94,
+          VOL: 88,
+          BAN: 86,
+          VEL: 90,
+          REF: 89,
+          '3TI': 99
+        },
+        traits: ['La Nevera', 'Bandeja Letal'],
+        avatarUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
+        currentRoast: ''
+      }
+    };
+
+    // Preset Avatars for Instant Swapping
+    const presetAvatars = [
+      'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
+      'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80',
+      'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80',
+      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400&q=80',
+      'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=400&q=80'
+    ];
+    let presetAvatarIdx = 0;
+
+    // Satirical & Roasted Quotes Library
+    const roastsFlex = [
+      "Mucho 95 de remate y pala de 380€, pero llevas 6 meses sin salir de Drive porque te dan un pánico visceral las paredes.",
+      "Te gastas 45€ por clase particular los martes para luego tirarla al cristal del fondo en el primer punto de oro del domingo.",
+      "Presumes de nivel 3.8 en Playtomic pero tu compañero lleva una semana con contractura en el cuello de cubrirte la espalda.",
+      "OVR 92 de fantasía: Tu mejor golpe es cantar 'MÍA MÍA' y dejar pasar una bola que bota 3 veces delante de tu nariz.",
+      "Dices que juegas al revés 'como Lebrón', pero en cuanto te tiran un globo al cuerpo pareces un gato intentando esquivar agua.",
+      "El calentamiento de 5 minutos lo haces como si estuvieras en el Premier Padel de Qatar, pero al minuto 15 pides agua y un fisio."
+    ];
+
+    const roastsTroll = [
+      "El auténtico agujero negro del pádel: cualquier bola que pasa por tu lado desaparece directamente en la reja del rival.",
+      "Tiene un 99 en 'Culpa del Viento' en pistas indoor. El único partido que ha ganado este mes fue porque el rival se torció un tobillo.",
+      "Le regalaron una pala de control y aun así manda las voleas a la M-30. Tu compañero merece un monumento y una subvención del gobierno.",
+      "Su posición no es ni Drive ni Revés: su posición es 'La Estatua'. Ve pasar las chiquitas como quien mira un tren de mercancías.",
+      "Dice que juega con resaca pero juega igual de mal cuando bebe Aquarius. Un auténtico héroe del Tercer Tiempo.",
+      "Gran dominador de la técnica 'Palazo al cristal y mirar con desprecio a la pared como si estuviera mal construida'."
+    ];
+
+    // Sound Synthesizer using Web Audio API / Tone.js
+    let synth = null;
+    function initAudio() {
+      try {
+        if (!synth && window.Tone) {
+          Tone.start();
+          synth = new Tone.PolySynth(Tone.Synth, {
+            oscillator: { type: 'triangle' },
+            envelope: { attack: 0.005, decay: 0.1, sustain: 0, release: 0.1 }
+          }).toDestination();
+          synth.volume.value = -12;
+        }
+      } catch (e) {
+        console.warn('Audio initialisation bypassed', e);
+      }
+    }
+
+    function playSound(type) {
+      if (!state.soundEnabled) return;
+      try {
+        initAudio();
+        if (!synth) return;
+        const now = Tone.now();
+        if (type === 'click') {
+          synth.triggerAttackRelease('C5', '32n', now);
+        } else if (type === 'scan') {
+          synth.triggerAttackRelease(['E5', 'G5', 'B5'], '16n', now);
+        } else if (type === 'success') {
+          synth.triggerAttackRelease(['C5', 'E5', 'G5', 'C6'], '16n', now);
+        } else if (type === 'roast') {
+          synth.triggerAttackRelease(['F4', 'A4', 'C5', 'Eb5'], '8n', now);
+        }
+      } catch (e) {
+        // Safe fallback
+      }
+    }
+
+    function toggleAudio() {
+      state.soundEnabled = !state.soundEnabled;
+      document.getElementById('soundIconOn').classList.toggle('hidden', !state.soundEnabled);
+      document.getElementById('soundIconOff').classList.toggle('hidden', state.soundEnabled);
+      showToast(state.soundEnabled ? 'Sonido Activado' : 'Sonido Silenciado', '🔊');
+    }
+
+    // Navigation Between Screens
+    function goToLanding() {
+      playSound('click');
+      document.getElementById('screen1').classList.remove('hidden');
+      document.getElementById('screen2').classList.add('hidden');
+      document.getElementById('screen3').classList.add('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function goToEditor() {
+      playSound('click');
+      document.getElementById('screen1').classList.add('hidden');
+      document.getElementById('screen2').classList.remove('hidden');
+      document.getElementById('screen3').classList.add('hidden');
+      updateCardLive();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function goToOutput() {
+      document.getElementById('screen1').classList.add('hidden');
+      document.getElementById('screen2').classList.add('hidden');
+      document.getElementById('screen3').classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Mode Selection Handling
+    function selectMode(selectedMode) {
+      state.mode = selectedMode;
+      playSound('click');
+      
+      const flexBtn = document.getElementById('modeFlexBtn');
+      const trollBtn = document.getElementById('modeTrollBtn');
+      const editorTag = document.getElementById('editorModeTag');
+
+      if (selectedMode === 'flex') {
+        flexBtn.className = "relative text-left p-3.5 rounded-xl bg-carbon-card border-2 border-neon-green/80 shadow-lg shadow-neon-green/10 transition-all flex flex-col justify-between h-36 group";
+        trollBtn.className = "relative text-left p-3.5 rounded-xl bg-carbon-card border border-carbon-border hover:border-pink-500/50 transition-all flex flex-col justify-between h-36 group";
+        flexBtn.querySelector('.mode-badge').className = "mode-badge text-[9px] font-extrabold uppercase px-2 py-0.5 rounded bg-neon-green text-black";
+        flexBtn.querySelector('.mode-badge').innerText = "Activo";
+        trollBtn.querySelector('.mode-badge').className = "mode-badge text-[9px] font-extrabold uppercase px-2 py-0.5 rounded bg-carbon-border text-slate-400";
+        trollBtn.querySelector('.mode-badge').innerText = "Troll";
+        editorTag.innerText = "MODO FLEX";
+        editorTag.className = "text-[10px] font-black uppercase px-2 py-0.5 rounded bg-neon-green/20 text-neon-green border border-neon-green/30";
+      } else {
+        trollBtn.className = "relative text-left p-3.5 rounded-xl bg-carbon-card border-2 border-pink-500 shadow-lg shadow-pink-500/10 transition-all flex flex-col justify-between h-36 group";
+        flexBtn.className = "relative text-left p-3.5 rounded-xl bg-carbon-card border border-carbon-border hover:border-neon-green/50 transition-all flex flex-col justify-between h-36 group";
+        trollBtn.querySelector('.mode-badge').className = "mode-badge text-[9px] font-extrabold uppercase px-2 py-0.5 rounded bg-pink-500 text-white";
+        trollBtn.querySelector('.mode-badge').innerText = "Activo";
+        flexBtn.querySelector('.mode-badge').className = "mode-badge text-[9px] font-extrabold uppercase px-2 py-0.5 rounded bg-carbon-border text-slate-400";
+        flexBtn.querySelector('.mode-badge').innerText = "Flex";
+        editorTag.innerText = "MODO ROAST / PAREJA";
+        editorTag.className = "text-[10px] font-black uppercase px-2 py-0.5 rounded bg-pink-500/20 text-pink-400 border border-pink-500/30";
+      }
+
+      showToast(selectedMode === 'flex' ? 'Modo Flex seleccionado 👑' : 'Modo Pareja Troll activado 🤡', '🎯');
+    }
+
+    // Playtomic OCR Simulator with Realistic Scanning FX
+    function simulatePlaytomicScan() {
+      const dropIdle = document.getElementById('dropzoneIdle');
+      const dropScanning = document.getElementById('dropzoneScanning');
+      const laser = document.getElementById('ocrLaserBeam');
+
+      playSound('scan');
+      laser.classList.remove('hidden');
+      dropIdle.classList.add('hidden');
+      dropScanning.classList.remove('hidden');
+
+      setTimeout(() => {
+        // Simulated parsed data
+        const detectedLevel = (Math.random() * (4.2 - 2.6) + 2.6).toFixed(2);
+        state.player.playtomicLevel = parseFloat(detectedLevel);
+        document.getElementById('inputPlaytomicLevel').value = detectedLevel;
+        document.getElementById('levelValueDisplay').innerText = detectedLevel;
+
+        laser.classList.add('hidden');
+        dropScanning.classList.add('hidden');
+        dropIdle.classList.remove('hidden');
+
+        playSound('success');
+        showToast(`Playtomic verificado: Nivel ${detectedLevel} extraído`, '✅');
+        
+        // Auto transition to editor after scan completion
+        setTimeout(() => {
+          goToEditor();
+        }, 600);
+      }, 1600);
+    }
+
+    // Dynamic OVR Calculator based on weighted padel attributes
+    function calculateOvr() {
+      const s = state.player.stats;
+      // Formula: Potencia 20%, Volea 20%, Bandeja 20%, Velocidad 15%, Reflejos 15%, 3er Tiempo 10%
+      const raw = (s.POT * 0.22) + (s.VOL * 0.20) + (s.BAN * 0.20) + (s.VEL * 0.15) + (s.REF * 0.13) + (s['3TI'] * 0.10);
+      return Math.min(99, Math.max(70, Math.round(raw)));
+    }
+
+    function updateStat(statKey, val) {
+      state.player.stats[statKey] = parseInt(val, 10);
+      document.getElementById(`val${statKey}`).innerText = val;
+      updateCardLive();
+    }
+
+    function updateLevelInput(val) {
+      const formatted = parseFloat(val).toFixed(2);
+      state.player.playtomicLevel = formatted;
+      document.getElementById('levelValueDisplay').innerText = formatted;
+      updateCardLive();
+    }
+
+    function randomizeStats() {
+      playSound('click');
+      const keys = ['POT', 'VOL', 'BAN', 'VEL', 'REF'];
+      keys.forEach(k => {
+        const rnd = Math.floor(Math.random() * 15) + 84; // 84 to 99
+        state.player.stats[k] = rnd;
+        document.getElementById(`slider${k}`).value = rnd;
+        document.getElementById(`val${k}`).innerText = rnd;
+      });
+      state.player.stats['3TI'] = 99;
+      document.getElementById('slider3TI').value = 99;
+      document.getElementById('val3TI').innerText = 99;
+      updateCardLive();
+      showToast('¡Stats al máximo! Puro humo padelero', '🚀');
+    }
+
+    // Trait Selection Management
+    function toggleTrait(traitName) {
+      playSound('click');
+      const idx = state.player.traits.indexOf(traitName);
+      if (idx > -1) {
+        state.player.traits.splice(idx, 1);
+      } else {
+        if (state.player.traits.length >= 2) {
+          state.player.traits.shift(); // remove oldest to keep max 2
+        }
+        state.player.traits.push(traitName);
+      }
+      renderTraitButtons();
+      updateCardLive();
+    }
+
+    function renderTraitButtons() {
+      const container = document.getElementById('traitsContainer');
+      const pills = container.querySelectorAll('.trait-pill');
+      pills.forEach(pill => {
+        const trait = pill.getAttribute('data-trait');
+        if (state.player.traits.includes(trait)) {
+          pill.className = "trait-pill px-2.5 py-1 rounded-full text-xs font-bold border transition bg-neon-green/20 border-neon-green text-neon-green";
+        } else {
+          pill.className = "trait-pill px-2.5 py-1 rounded-full text-xs font-bold border transition bg-carbon border-carbon-border text-slate-400 hover:text-white";
+        }
+      });
+      document.getElementById('traitsSelectedCounter').innerText = `${state.player.traits.length}/2 seleccionados`;
+    }
+
+    // Avatar Presets & Custom Upload
+    function cyclePresetAvatars() {
+      playSound('click');
+      presetAvatarIdx = (presetAvatarIdx + 1) % presetAvatars.length;
+      state.player.avatarUrl = presetAvatars[presetAvatarIdx];
+      updateCardLive();
+      showToast('Avatar cambiado 🎾', '👤');
+    }
+
+    function handleAvatarUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        state.player.avatarUrl = e.target.result;
+        updateCardLive();
+        showToast('Foto cargada con éxito', '📸');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function cycleCardFoil() {
+      playSound('click');
+      state.foilThemeIndex = (state.foilThemeIndex + 1) % state.foilThemes.length;
+      updateCardLive();
+      showToast(`Estilo: ${state.themeNames[state.foilThemeIndex]}`, '✨');
+    }
+
+    function updateCardLive() {
+      // Inputs read
+      const nameInput = document.getElementById('inputPlayerName').value.trim() || 'Jugador Padel';
+      const sideInput = document.getElementById('inputPlayerSide').value;
+      const flagInput = document.getElementById('inputPlayerFlag').value;
+
+      state.player.name = nameInput;
+      state.player.side = sideInput;
+      state.player.flag = flagInput;
+      state.player.ovr = calculateOvr();
+
+      // Update Mini Preview DOM
+      document.getElementById('miniCardName').innerText = state.player.name;
+      document.getElementById('miniCardPos').innerText = state.player.side;
+      document.getElementById('miniCardFlag').innerText = state.player.flag;
+      document.getElementById('miniCardOvr').innerText = state.player.ovr;
+      document.getElementById('miniCardPtBadge').innerText = state.player.playtomicLevel;
+      document.getElementById('miniCardAvatarImg').src = state.player.avatarUrl;
+
+      // Stats
+      document.getElementById('miniStatPOT').innerText = state.player.stats.POT;
+      document.getElementById('miniStatVOL').innerText = state.player.stats.VOL;
+      document.getElementById('miniStatBAN').innerText = state.player.stats.BAN;
+      document.getElementById('miniStatVEL').innerText = state.player.stats.VEL;
+      document.getElementById('miniStatREF').innerText = state.player.stats.REF;
+      document.getElementById('miniStat3TI').innerText = state.player.stats['3TI'];
+
+      // Traits in mini preview
+      const miniTraitsBox = document.getElementById('miniPlaystylesTray');
+      miniTraitsBox.innerHTML = '';
+      state.player.traits.forEach(t => {
+        const span = document.createElement('span');
+        span.className = "text-[8px] px-1.5 py-0.5 rounded bg-trophy-gold/20 text-trophy-gold border border-trophy-gold/40 font-bold truncate max-w-[90px]";
+        span.innerText = t;
+        miniTraitsBox.appendChild(span);
+      });
+
+      // Foils
+      const foilClass = state.foilThemes[state.foilThemeIndex];
+      const miniFoil = document.getElementById('miniFoilBorder');
+      state.foilThemes.forEach(th => miniFoil.classList.remove(th));
+      miniFoil.classList.add(foilClass);
+    }
+
+    function generateRoastAndCard() {
+      playSound('roast');
+      updateCardLive();
+
+      // Pick roast based on mode & stats
+      rerollRoast(false);
+
+      // Populate Screen 3
+      document.getElementById('finalCardOvr').innerText = state.player.ovr;
+      document.getElementById('finalCardPos').innerText = state.player.side;
+      document.getElementById('finalCardFlag').innerText = state.player.flag;
+      document.getElementById('finalCardName').innerText = state.player.name;
+      document.getElementById('finalCardPlaytomic').innerText = state.player.playtomicLevel;
+      document.getElementById('finalCardAvatarImg').src = state.player.avatarUrl;
+
+      document.getElementById('finalStatPOT').innerText = state.player.stats.POT;
+      document.getElementById('finalStatVOL').innerText = state.player.stats.VOL;
+      document.getElementById('finalStatBAN').innerText = state.player.stats.BAN;
+      document.getElementById('finalStatVEL').innerText = state.player.stats.VEL;
+      document.getElementById('finalStatREF').innerText = state.player.stats.REF;
+      document.getElementById('finalStat3TI').innerText = state.player.stats['3TI'];
+
+      // Final Foil Class
+      const finalFoil = document.getElementById('finalCardFoil');
+      state.foilThemes.forEach(th => finalFoil.classList.remove(th));
+      finalFoil.classList.add(state.foilThemes[state.foilThemeIndex]);
+
+      // Final Traits
+      const finalTraits = document.getElementById('finalCardTraits');
+      finalTraits.innerHTML = '';
+      state.player.traits.forEach(t => {
+        const span = document.createElement('span');
+        span.className = "text-[9px] px-2 py-0.5 rounded-full bg-trophy-gold/20 text-trophy-gold border border-trophy-gold/40 font-bold flex items-center gap-1";
+        span.innerHTML = `<span>⚡</span> ${t}`;
+        finalTraits.appendChild(span);
+      });
+
+      // Target Roast badge
+      const roastBadge = document.getElementById('roastTargetBadge');
+      if (state.mode === 'troll') {
+        roastBadge.innerText = '🎯 Modo: Pareja Troll (A Degüello)';
+        roastBadge.className = 'text-pink-400 font-bold';
+      } else {
+        roastBadge.innerText = '🎯 Modo: Flex Roast (Auto-Hype)';
+        roastBadge.className = 'text-neon-cyan font-bold';
+      }
+
+      goToOutput();
+      showToast('¡Carta y Roast generados con éxito!', '🔥');
+    }
+
+    function rerollRoast(triggerSound = true) {
+      if (triggerSound) playSound('click');
+      const pool = state.mode === 'troll' ? roastsTroll : roastsFlex;
+      const randomRoast = pool[Math.floor(Math.random() * pool.length)];
+      state.player.currentRoast = randomRoast;
+      document.getElementById('roastTextParagraph').innerText = `"${randomRoast}"`;
+      document.getElementById('instaCopiedSnippet').innerText = randomRoast;
+    }
+
+    // 3D Card Tilt Interactive Experience (Touch & Mouse)
+    function handleCardTilt(e) {
+      const card = document.getElementById('finalCardContainer');
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      
+      const rotateX = ((y - centerY) / centerY) * -12;
+      const rotateY = ((x - centerX) / centerX) * 12;
+      
+      card.style.transform = `rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(1.02, 1.02, 1.02)`;
+      
+      const sheen = document.getElementById('finalHoloSheen');
+      sheen.style.backgroundPosition = `${(x / rect.width) * 100}% ${(y / rect.height) * 100}%`;
+    }
+
+    function handleCardTouchMove(e) {
+      if (!e.touches[0]) return;
+      const card = document.getElementById('finalCardContainer');
+      const rect = card.getBoundingClientRect();
+      const touch = e.touches[0];
+      const x = touch.clientX - rect.left;
+      const y = touch.clientY - rect.top;
+      
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      
+      const rotateX = ((y - centerY) / centerY) * -10;
+      const rotateY = ((x - centerX) / centerX) * 10;
+      
+      card.style.transform = `rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg)`;
+    }
+
+    function resetCardTilt() {
+      const card = document.getElementById('finalCardContainer');
+      card.style.transform = 'rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+    }
+
+    // High-Resolution 900x1350 Canvas HD Card Generator
+    function downloadCardHD() {
+      playSound('click');
+      const canvas = document.getElementById('exportCanvas');
+      const ctx = canvas.getContext('2d');
+      const w = canvas.width;
+      const h = canvas.height;
+
+      // Draw Background Shield & Border
+      ctx.clearRect(0, 0, w, h);
+      
+      // Card Background Dark Gradient
+      const bgGrad = ctx.createLinearGradient(0, 0, w, h);
+      bgGrad.addColorStop(0, '#151922');
+      bgGrad.addColorStop(0.5, '#0C0E13');
+      bgGrad.addColorStop(1, '#1A212E');
+      ctx.fillStyle = bgGrad;
+      ctx.fillRect(0, 0, w, h);
+
+      // Gold / Neon Outer Border
+      ctx.lineWidth = 14;
+      ctx.strokeStyle = state.foilThemeIndex === 1 ? '#22C55E' : (state.foilThemeIndex === 2 ? '#EC4899' : '#F59E0B');
+      ctx.strokeRect(20, 20, w - 40, h - 40);
+
+      // Inner Border
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+      ctx.strokeRect(32, 32, w - 64, h - 64);
+
+      // Header Brand
+      ctx.font = 'bold 28px Rajdhani, sans-serif';
+      ctx.fillStyle = '#94A3B8';
+      ctx.textAlign = 'center';
+      ctx.fillText('PADEL ULTIMATE CARDS • FUT 26', w / 2, 75);
+
+      // Overall Rating (OVR)
+      ctx.textAlign = 'left';
+      ctx.font = '900 130px Rajdhani, sans-serif';
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fillText(state.player.ovr.toString(), 70, 220);
+
+      // Position
+      ctx.font = 'bold 40px Rajdhani, sans-serif';
+      ctx.fillStyle = '#F59E0B';
+      ctx.fillText(state.player.side.toUpperCase(), 75, 275);
+
+      // Nationality Flag & League
+      ctx.font = '55px serif';
+      ctx.fillText(state.player.flag, 75, 350);
+
+      // Draw Avatar Cutout
+      const avatarImg = new Image();
+      avatarImg.crossOrigin = 'anonymous';
+      avatarImg.onload = function() {
+        ctx.save();
+        ctx.beginPath();
+        ctx.rect(380, 110, 440, 520);
+        ctx.closePath();
+        ctx.clip();
+        ctx.drawImage(avatarImg, 380, 110, 440, 520);
+        ctx.restore();
+
+        // Blend gradient over avatar base
+        const avatarBlend = ctx.createLinearGradient(0, 500, 0, 650);
+        avatarBlend.addColorStop(0, 'rgba(12, 14, 19, 0)');
+        avatarBlend.addColorStop(1, 'rgba(12, 14, 19, 1)');
+        ctx.fillStyle = avatarBlend;
+        ctx.fillRect(380, 500, 440, 150);
+
+        continueDrawingCanvas();
+      };
+      avatarImg.onerror = function() {
+        // Fallback drawing if cross-origin image blocked
+        ctx.fillStyle = '#1e293b';
+        ctx.fillRect(380, 110, 440, 520);
+        ctx.font = 'bold 36px Rajdhani, sans-serif';
+        ctx.fillStyle = '#22C55E';
+        ctx.textAlign = 'center';
+        ctx.fillText('PADEL HERO', 600, 360);
+        continueDrawingCanvas();
+      };
+      avatarImg.src = state.player.avatarUrl;
+
+      function continueDrawingCanvas() {
+        // Playtomic Real Stamp Ribbon
+        ctx.fillStyle = '#0F172A';
+        ctx.strokeStyle = '#0094FF';
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.roundRect(70, 620, 760, 65, 12);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.font = 'bold 24px Outfit, sans-serif';
+        ctx.fillStyle = '#94A3B8';
+        ctx.textAlign = 'left';
+        ctx.fillText('PLAYTOMIC REAL VERIFICADO:', 95, 662);
+
+        ctx.font = '900 32px Rajdhani, monospace';
+        ctx.fillStyle = '#38BDF8';
+        ctx.textAlign = 'right';
+        ctx.fillText(`NIVEL ${state.player.playtomicLevel}  ✓`, 800, 663);
+
+        // Player Name Banner
+        ctx.font = '900 68px Rajdhani, sans-serif';
+        ctx.fillStyle = '#FFFFFF';
+        ctx.textAlign = 'center';
+        ctx.fillText(state.player.name.toUpperCase(), w / 2, 760);
+
+        // Gold divider
+        const lineGrad = ctx.createLinearGradient(150, 0, 750, 0);
+        lineGrad.addColorStop(0, 'transparent');
+        lineGrad.addColorStop(0.5, '#F59E0B');
+        lineGrad.addColorStop(1, 'transparent');
+        ctx.strokeStyle = lineGrad;
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        ctx.moveTo(150, 785);
+        ctx.lineTo(750, 785);
+        ctx.stroke();
+
+        // 6 Stats Matrix Box
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.65)';
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.roundRect(70, 810, 760, 240, 16);
+        ctx.fill();
+        ctx.stroke();
+
+        // Stats Values
+        const s = state.player.stats;
+        ctx.font = '900 48px Rajdhani, sans-serif';
+        ctx.textAlign = 'left';
+
+        // Column 1
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillText(`${s.POT} POT`, 120, 880);
+        ctx.fillText(`${s.VOL} VOL`, 120, 950);
+        ctx.fillText(`${s.BAN} BAN`, 120, 1020);
+
+        // Column 2
+        ctx.fillText(`${s.VEL} VEL`, 500, 880);
+        ctx.fillText(`${s.REF} REF`, 500, 950);
+        ctx.fillStyle = '#22C55E';
+        ctx.fillText(`${s['3TI']} 3TI 🍻`, 500, 1020);
+
+        // Traits Badges
+        ctx.font = 'bold 26px Outfit, sans-serif';
+        ctx.textAlign = 'center';
+        const t1 = state.player.traits[0] || 'La Nevera';
+        const t2 = state.player.traits[1] || 'Bandeja Letal';
+
+        ctx.fillStyle = '#FEF3C7';
+        ctx.fillText(`⚡ ${t1}   •   ⚡ ${t2}`, w / 2, 1100);
+
+        // The Roast Quote Box at bottom of card
+        ctx.fillStyle = '#1A1024';
+        ctx.strokeStyle = '#EC4899';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.roundRect(70, 1140, 760, 140, 14);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.font = 'italic 21px Outfit, sans-serif';
+        ctx.fillStyle = '#F1F5F9';
+        ctx.textAlign = 'center';
+
+        // Wrap roast text cleanly
+        const roastWords = state.player.currentRoast.split(' ');
+        let line1 = '', line2 = '';
+        for (let word of roastWords) {
+          if ((line1 + word).length < 52) {
+            line1 += word + ' ';
+          } else {
+            line2 += word + ' ';
+          }
+        }
+        ctx.fillText(`"${line1.trim()}`, w / 2, 1195);
+        if (line2) ctx.fillText(`${line2.trim()}"`, w / 2, 1235);
+
+        // Watermark Footer
+        ctx.font = 'bold 20px monospace';
+        ctx.fillStyle = '#64748B';
+        ctx.fillText('padelcards.app • Generado con Padel Ultimate Cards', w / 2, 1315);
+
+        // Trigger Direct Download
+        const link = document.createElement('a');
+        link.download = `PadelCard_${state.player.name.replace(/\s+/g, '_')}_FUT.png`;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+
+        showToast('Carta HD descargada', '💾');
+      }
+    }
+
+    function shareOnWhatsApp() {
+      playSound('click');
+      const p = state.player;
+      const text = `🏆 *CARTA PADEL ULTIMATE FC 26*\n\n` +
+        `👤 *Jugador:* ${p.name} (${p.side})\n` +
+        `⭐ *OVR:* ${p.ovr} | 🛡️ *Playtomic Real:* ${p.playtomicLevel}\n` +
+        `📊 *Stats:* POT ${p.stats.POT} | VOL ${p.stats.VOL} | BAN ${p.stats.BAN} | 3TI ${p.stats['3TI']}🍻\n\n` +
+        `🔥 *Roast del Club:*\n"${p.currentRoast}"\n\n` +
+        `Crea la tuya o tuesta a tu pareja en: https://padelcards.app`;
+
+      const waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
+      window.open(waUrl, '_blank');
+    }
+
+    function openInstagramModal() {
+      playSound('click');
+      const p = state.player;
+      const clipText = `Mi carta FUT de pádel: OVR ${p.ovr} pero Playtomic ${p.playtomicLevel} 😂 "${p.currentRoast}" #PadelCards`;
+      
+      // Copy to clipboard fallback safe
+      copyToClipboard(clipText);
+      document.getElementById('instaModal').classList.remove('hidden');
+      document.getElementById('instaModal').classList.add('flex');
+    }
+
+    function closeInstagramModal() {
+      document.getElementById('instaModal').classList.add('hidden');
+      document.getElementById('instaModal').classList.remove('flex');
+    }
+
+    function copyToClipboard(text) {
+      try {
+        const dummy = document.createElement('textarea');
+        document.body.appendChild(dummy);
+        dummy.value = text;
+        dummy.select();
+        document.execCommand('copy');
+        document.body.removeChild(dummy);
+        showToast('Texto copiado al portapapeles', '📋');
+      } catch (err) {
+        console.warn('Clipboard fallback', err);
+      }
+    }
+
+    // Custom Toast Notification System
+    let toastTimeout = null;
+    function showToast(message, icon = '⚡') {
+      const toast = document.getElementById('toastNotification');
+      document.getElementById('toastMsg').innerText = message;
+      document.getElementById('toastIcon').innerText = icon;
+
+      toast.classList.remove('translate-y-24', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      if (toastTimeout) clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.add('translate-y-24', 'opacity-0');
+        toast.classList.remove('translate-y-0', 'opacity-100');
+      }, 2600);
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      renderTraitButtons();
+      updateCardLive();
+      rerollRoast(false);
+    });
+  </script>
+</body>
+</html>
